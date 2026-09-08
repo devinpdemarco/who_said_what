@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Example News Story",
+    "url": "https://example.com/story-1",
+    "source": "Example News",
+    "author": "John Smith",
+    "published_date": "2026-09-08",
+    "raw_content": "<p>This is an example article about an important event.</p>"
+  },
+  {
+    "title": "Another News Story",
+    "url": "https://example.com/story-2",
+    "source": "Another News",
+    "author": "Jane Doe",
+    "published_date": "2026-09-08",
+    "raw_content": "<p>This is another example article with <b>HTML</b> that needs to be cleaned.</p>"
+  }
+]
