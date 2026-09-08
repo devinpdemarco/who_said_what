@@ -64,3 +64,38 @@
   font-weight: 600;
   cursor: pointer;
 }
+
+.date-filters {
+  display: flex;
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.date-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.date-field label {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.date-field input {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.error-message {
+  color: red;
+  margin-top: 16px;
+  font-weight: 600;
+}
+
+.submitted-results {
+  margin-top: 32px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #ddd;
+}
