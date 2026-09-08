@@ -1,8 +1,12 @@
+import './App.css'
+import Header from './components/Header'
+import SearchSection from './components/SearchSection'
+
 function App() {
   return (
     <div>
-      <h1>Who Said What</h1>
-      <p>Frontend setup is working.</p>
+      <Header />
+      <SearchSection />
     </div>
   )
 }
