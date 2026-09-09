@@ -1,31 +1,54 @@
 import { useState } from 'react'
+import ArticleCard from './ArticleCard'
+
 function SearchSection() {
-    const [searchTerm, setSearchTerm] = useState('')
-    const [startDate, setStartDate] = useState('')
-    const [endDate, setEndDate] = useState('')
-    const [submittedResults, setSubmittedResults] = useState(null)
-    const [error, setError] = useState('')
+  const [searchTerm, setSearchTerm] = useState('')
+  const [startDate, setStartDate] = useState('')
+  const [endDate, setEndDate] = useState('')
+  const [submittedResults, setSubmittedResults] = useState(null)
+  const [error, setError] = useState('')
 
-    function handleSearch() {
-        if(!searchTerm || !startDate || !endDate) {
-            setError('Please fill in all fields.')
-            setSubmittedResults(null)
-            return
-        }
-        if(startDate > endDate) {
-            setError('Start date cannot be after end date.')
-            setSubmittedResults(null)
-            return
-        }
-
-        setError('')
-
-        setSubmittedResults({
-            searchTerm: searchTerm,
-            startDate: startDate,
-            endDate: endDate
-        })
+  const exampleArticles = [
+    {
+      source: 'Reuters',
+      headline: 'Example headline from Reuters',
+      summary: 'Example summary of how this source is covering the story.',
+      sentiment: 'Neutral',
+      perspecive: 'Factual / Neutral',
+      publishedDate: 'September 8, 2026',
+      url: "https://www.reuters.com"
+    },
+    {
+      source: 'Associated Press',
+      headline: 'Example headline from Associated Press',
+      summary: 'Example summary of how a different source is covering the story.',
+      sentiment: 'Positive',
+      perspective: 'Context Focused',
+      publishedDate: 'September 9, 2026',
+      url: "https://apnews.com"
     }
+  ]
+  function handleSearch() {
+    if (!searchTerm || !startDate || !endDate) {
+      setError('Please fill in all fields.')
+      setSubmittedResults(null)
+      return
+    }
+
+    if (startDate > endDate) {
+      setError('Start date cannot be after end date.')
+      setSubmittedResults(null)
+      return
+    }
+
+    setError('')
+
+    setSubmittedResults({
+      searchTerm: searchTerm,
+      startDate: startDate,
+      endDate: endDate
+    })
+  }
 
   return (
     <section className="search-section">
@@ -46,40 +69,64 @@ function SearchSection() {
 
           <button onClick={handleSearch}>Search</button>
         </div>
+
         <div className="date-filters">
-            <div className="date-field">
-                <label htmlFor="start-date">From</label>
-                <input 
-                    type="date" 
-                    id="start-date" 
-                    value={startDate}
-                    onChange={(event) => setStartDate(event.target.value)}
-                />
+          <div className="date-field">
+            <label htmlFor="start-date">From</label>
+            <input
+              type="date"
+              id="start-date"
+              value={startDate}
+              onChange={(event) => setStartDate(event.target.value)}
+            />
+          </div>
+
+          <div className="date-field">
+            <label htmlFor="end-date">To</label>
+            <input
+              type="date"
+              id="end-date"
+              value={endDate}
+              onChange={(event) => setEndDate(event.target.value)}
+            />
+          </div>
+        </div>
+
+        {error && (
+          <p className="error-message">{error}</p>
+        )}
+
+        {submittedResults && (
+          <div>
+            <div className="submitted-results">
+              <h2>Search Results</h2>
+
+              <p>
+                Showing results for:{' '}
+                <strong>{submittedResults.searchTerm}</strong>
+              </p>
+
+              <p>
+                Date range: {submittedResults.startDate} to{' '}
+                {submittedResults.endDate}
+              </p>
             </div>
 
-            <div className="date-field">
-                <label htmlFor="end-date">To</label>
-                <input 
-                    type="date" 
-                    id="end-date" 
-                    value={endDate}
-                    onChange={(event) => setEndDate(event.target.value)}
+            <div className="article-cards">
+              {exampleArticles.map((article) => (
+                <ArticleCard
+                  key={article.headline}
+                  source={article.source}
+                  headline={article.headline}
+                  summary={article.summary}
+                  sentiment={article.sentiment}
+                  perspective={article.perspective}
+                  publishedDate={article.publishedDate}
+                  url={article.url}
                 />
+              ))}
             </div>
-        </div>
-        {error && (
-            <p className="error-message">{error}</p>
-        )}
-        {submittedResults && (
-            <div className="submitted-results">
-                <h2>Search Results</h2>
-                <p>
-                    Showing results for: <strong>{submittedResults.searchTerm}</strong>
-                </p>
-                <p>
-                    Date range: {submittedResults.startDate} to {submittedResults.endDate}
-                </p>
-            </div>
+          </div>
         )}
       </div>
     </section>

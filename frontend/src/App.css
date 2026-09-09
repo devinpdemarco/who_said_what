@@ -99,3 +99,49 @@
   background: #fff;
   border: 1px solid #ddd;
 }
+
+.article-card {
+  padding: 20px;
+  margin-top: 20px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+}
+
+.artile-card h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.article-card h4 {
+  margin: 0 0 10px;
+  font-size: 20px;
+}
+
+.article-card p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.article-card {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.article-analysis {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid #ddd;
+}
+
+.article-card a {
+  display: inline-block;
+  margin-top: 16px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.article-card a:hover {
+  text-decoration: underline;
+}
