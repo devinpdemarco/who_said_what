@@ -5,8 +5,8 @@ function Header() {
 
       <nav className="nav-links">
         <a href="#">Home</a>
-        <a href="#">Compare</a>
-        <a href="#">Timeline</a>
+        <a href="compare">Compare</a>
+        <a href="timeline">Timeline</a>
         <a href="#">About</a>
       </nav>
     </header>

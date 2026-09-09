@@ -77,14 +77,14 @@
 }
 
 .date-field label {
-  font-size: 12px;
+  font-size: 20px;
   font-weight: 600;
 }
 
 .date-field input {
   padding: 10px 12px;
   border: 1px solid #ccc;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .error-message {
@@ -107,7 +107,7 @@
   border: 1px solid #ddd;
 }
 
-.artile-card h3 {
+.article-card h3 {
   margin: 0 0 10px;
   font-size: 16px;
 }
@@ -144,4 +144,99 @@
 
 .article-card a:hover {
   text-decoration: underline;
+}
+
+.comparison-summary {
+  margin-top: 24px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #ddd;
+}
+
+.comparison-summary h3 {
+  margin: 8px 0;
+}
+
+.date-field select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  font-size: 18px;
+  background: white;
+}
+
+.date-field {
+  display: flex;
+  flex-direction: column;
+  width: 220px;
+}
+
+.timeline {
+  margin-top: 24px;
+  padding: 20px;
+  background: white;
+  border: 1px solid #ddd;
+}
+
+.timeline h3 {
+  margin-top: 0;
+  font-size: 22px;
+}
+
+.timeline-item {
+  padding: 14px 0;
+  border-left: 3px solid #111;
+  padding-left: 16px;
+  margin-left: 8px;
+}
+
+.timeline-item strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.timeline-item p {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .site-header {
+    padding: 16px 20px;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .nav-links {
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .search-section {
+    padding: 50px 20px;
+  }
+
+  .search-content h1 {
+    font-size: 36px;
+  }
+
+  .search-bar {
+    flex-direction: column;
+  }
+
+  .search-bar button {
+    width: 100%;
+  }
+
+  .date-filters {
+    flex-direction: column;
+  }
+
+  .date-field {
+    width: 100%;
+  }
+
+  .article-cards {
+    grid-template-columns: 1fr;
+  }
 }
