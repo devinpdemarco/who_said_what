@@ -12,21 +12,46 @@ function ComparisonSummary({ articles }) {
   )]
 
   return (
-    <div className="comparison-summary" id="compare">
-      <h3>Coverage Comparison</h3>
+    <section className="comparison-summary" id="compare">
+      <div className="comparison-summary-header">
+        <p className="comparison-eyebrow">
+          COMPARISON SUMMARY
+        </p>
 
-      <p>
-        <strong>Articles compared:</strong> {articles.length}
-      </p>
+        <h3>
+          What changes between perspectives?
+        </h3>
+      </div>
 
-      <p>
-        <strong>Sentiments found:</strong> {sentiments.join(', ')}
-      </p>
+      <div className="comparison-insights">
+        <div className="insight-card">
+          <h4>Articles compared</h4>
+          <p>{articles.length} sources are included in this comparison.</p>
+        </div>
 
-      <p>
-        <strong>Perspectives found:</strong> {perspectives.join(', ')}
-      </p>
-    </div>
+        <div className="insight-card">
+          <h4>Tone difference</h4>
+          <p>
+            Sentiments found: {sentiments.join(', ')}
+          </p>
+        </div>
+
+        <div className="insight-card">
+          <h4>Perspective difference</h4>
+          <p>
+            Perspectives found: {perspectives.join(', ')}
+          </p>
+        </div>
+
+        <div className="insight-card">
+          <h4>Coverage insight</h4>
+          <p>
+            Different sources may emphasize different details, priorities,
+            and interpretations of the same story.
+          </p>
+        </div>
+      </div>
+    </section>
   )
 }
 
