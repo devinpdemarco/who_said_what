@@ -62,3 +62,15 @@ The school TA tracks spending. Plan within $100; this is not an automatic spendi
 3. Agree with Ben on the actual frontend framework before writing its Dockerfile.
 4. Kynnedy supplies the ML runtime and input/output interface; set limits after measuring memory use.
 5. Add HTTPS, deployment CI, off-host backups and meaningful end-to-end/load tests before production.
+
+## Verified deployment — 2026-09-20
+
+- EC2 name in the console: `Who_Said_What`; instance ID `i-0b8b92301be98a6dc`, Ohio.
+- Public address at deployment: http://18.223.111.54 (auto-assigned; may change).
+- Server checkout: `/home/ubuntu/who_said_what`, branch `codex/ec2-bootstrap`.
+- Both Compose services passed health checks. Public `/healthz` returned `ok`.
+- Restarted n8n, waited for health checks, and verified its SQLite database remained present in the mounted volume. No user workflows exist yet.
+- Verified the browser reaches the public landing page and n8n owner setup through an SSH tunnel.
+- Added inbound TCP 80 from IPv4 internet to this instance's security group after user confirmation. Existing SSH source restriction and HTTPS rule retained; HTTPS service is not configured.
+- CPU credit mode remains **Unlimited**. Changing it to Standard was denied because the school IAM policy lacks `ec2:ModifyInstanceCreditSpecification`. Ask the TA to switch this instance to Standard or grant that action if appropriate. No heavy load test was run.
+- n8n owner account setup is left to Xiaopei. No Supabase credentials, production integrations or off-host backup were configured.
