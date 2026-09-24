@@ -1,12 +1,12 @@
 # Who Said What
 
-A multi-source news comparison project. This branch contains the initial EC2 deployment foundation, rebuilt from `dev`.
+A multi-source news comparison project. This repository contains the EC2 deployment foundation.
 
-## Current scope
+## Current deployment
 
-- Public Nginx development landing page and `/healthz` endpoint.
-- Private n8n editor accessed through an SSH tunnel.
-- Persistent n8n volume, memory/CPU limits, health checks and bounded logs.
-- No article ingestion, Supabase connection, frontend application or ML model yet.
+- n8n editor: https://whosaidwhat-n8n.duckdns.org (individual n8n account required).
+- Caddy provides HTTPS and proxies requests to n8n; host port 5678 stays loopback-only.
+- Persistent n8n and certificate volumes, resource limits, health checks and bounded logs.
+- Frontend, data pipeline and ML integration remain separate work.
 
-See [deployment instructions](docs/deployment.md). Never commit `.env` or SSH private keys.
+See [deployment instructions](docs/deployment.md). Never commit `.env`, private keys or workflow credentials.

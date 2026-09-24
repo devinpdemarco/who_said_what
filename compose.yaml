@@ -8,14 +8,16 @@ x-logging: &logging
 
 services:
   web:
-    image: nginx:stable-alpine@sha256:ef8676b33d681f272ba429b27658bdd7e640963279714c96bddf1dc76307f7b6
+    image: caddy:2-alpine
     restart: unless-stopped
     ports:
       - "80:80"
+      - "443:443"
     volumes:
-      - ./infra/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-      - ./infra/nginx/index.html:/usr/share/nginx/html/index.html:ro
-    mem_limit: 128m
+      - ./infra/caddy:/etc/caddy:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    mem_limit: 256m
     cpus: 0.5
     logging: *logging
     healthcheck:
@@ -23,7 +25,7 @@ services:
       interval: 15s
       timeout: 5s
       retries: 5
-      start_period: 10s
+      start_period: 15s
 
   n8n:
     image: docker.n8n.io/n8nio/n8n:stable@sha256:b73045abaddb40cb4024e86eea1b1f69093501a7339f685a4cd486b7743d23ae
@@ -31,9 +33,13 @@ services:
     ports:
       - "127.0.0.1:5678:5678"
     environment:
-      N8N_HOST: localhost
+      N8N_HOST: whosaidwhat-n8n.duckdns.org
       N8N_PORT: "5678"
-      N8N_PROTOCOL: http
+      N8N_PROTOCOL: https
+      N8N_EDITOR_BASE_URL: https://whosaidwhat-n8n.duckdns.org
+      WEBHOOK_URL: https://whosaidwhat-n8n.duckdns.org/
+      N8N_PROXY_HOPS: "1"
+      N8N_SECURE_COOKIE: "true"
       N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY:?Set N8N_ENCRYPTION_KEY in .env}
       N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: "true"
       N8N_DIAGNOSTICS_ENABLED: "false"
@@ -53,4 +59,6 @@ services:
       start_period: 60s
 
 volumes:
+  caddy_data:
+  caddy_config:
   n8n_data:

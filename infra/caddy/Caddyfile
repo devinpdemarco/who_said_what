@@ -1,0 +1,7 @@
+whosaidwhat-n8n.duckdns.org {
+    reverse_proxy n8n:5678
+}
+
+:80 {
+    respond /healthz "ok" 200
+}
