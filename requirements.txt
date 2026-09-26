@@ -1,0 +1,6 @@
+yake
+gensim
+numpy
+scikit-learn
+matplotlib
+nltk
