@@ -1,22 +1,25 @@
-from sklearn.datasets import fetch_20newsgroups
-import numpy as np
+import nltk
+from nltk.corpus import stopwords
+#nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('punkt_tab')
 
-# data import
-# importing sample categories from train data
-sample_categories = ['soc.religion.christian', 'sci.space', 'sci.med', 'sci.electronics', 'rec.sport.baseball']
-# only doing one category for now to ensure that the clusters make sense
-ng_train = fetch_20newsgroups(subset='train',
-                              categories=sample_categories[:3],
-                              remove=('headers', 'footers', 'quotes'),
-                              random_state=42
-                              )
+def preprocess_data(data):
 
-# data preprocessing
-# basic cleaning of document text and removal of basic punctuation
-punctuation = '\n.,;/\\()?-!'
+    # data preprocessing
+    # basic cleaning of document text and removal of basic punctuation
+    # source: https://medium.com/@danielafrimi/text-clustering-using-nlp-techniques-c2e6b08b6e95
 
-for p in punctuation:
-    for i in range(len(ng_train.data)):
-        ng_train.data[i] = ng_train.data[i].replace(p, '')
-        ng_train.data[i] = ng_train.data[i].lower()
-
+    # remove hyperlinks
+    for i, doc in enumerate(data):
+        # remove hyperlinks
+        data[i] = doc.replace(r'http\S+','')
+        # remove special characters and numbers
+        data[i] = doc.replace('[^A-Za-z]+','')
+        # remove stopwords
+        tokens = nltk.word_tokenize(doc)
+        #tokens = [w for w in tokens if not w.lower() in stopwords.words('english')]
+        data[i] = ' '.join(tokens)
+        data[i] = doc.lower().strip()
+    
+    return data

@@ -11,18 +11,15 @@ The machine learning pipeline will consist of clustering, keyword extraction, an
 5. Sentiment Analysis
 6. Bias Analysis
 
-## Setup
-TODO
-
 ## Run and Test Instructions
-TODO
+Run main.py to see current keyword extractions over a set of mock data from scikit-learn's 20newsgroup dataset.
 
 ## Status
 Currently Implemented:
 - Mini preprocessing for basic text cleaning
-- Doc2Vec embeddings
-- DBSCAN clustering (I am still fine-tuning here)
-- YAKE keyword extraction (I've extracted over the full data but not necessarily the clusters; the implementation is fairly the same)
+- Sentence Transformer embeddings
+- K-Means clustering
+- YAKE keyword extraction 
 
 In Development:
 - Sentiment Model
