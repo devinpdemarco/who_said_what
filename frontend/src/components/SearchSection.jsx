@@ -1,50 +1,53 @@
+
 import { useState } from 'react'
 import ArticleCard from './ArticleCard'
+import ArticleCarousel from './ArticleCarousel'
 import ComparisonSummary from './ComparisonSummary'
-import Timeline from './Timeline'
 import BiasCoverage from './BiasCoverage'
+import Timeline from './Timeline'
 
 function SearchSection() {
   const [searchTerm, setSearchTerm] = useState('')
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
+  const [sourceFilter, setSourceFilter] = useState('All')
   const [submittedResults, setSubmittedResults] = useState(null)
   const [error, setError] = useState('')
-  const [sourceFilter, setSourceFilter] = useState('All')
   const [loading, setLoading] = useState(false)
 
+  // Temporary mock data until the backend is connected
   const exampleArticles = [
     {
-      source: 'example source',
-      headline: 'Example headline from example source',
+      source: 'Reuters',
+      headline: 'Example headline from Reuters',
       summary: 'Example summary of how this source is covering the story.',
       sentiment: 'Neutral',
       perspective: 'Factual / Neutral',
+      politicalLeaning: null,
       publishedDate: 'September 8, 2026',
-      url: 'https://www.examplesource.com'
+      url: 'https://www.reuters.com'
     },
     {
-      source: 'example source 2',
-      headline: 'Example headline from example source 2',
+      source: 'Associated Press',
+      headline: 'Example headline from Associated Press',
       summary: 'Example summary of how a different source is covering the story.',
       sentiment: 'Positive',
       perspective: 'Context Focused',
+      politicalLeaning: null,
       publishedDate: 'September 9, 2026',
-      url: 'https://examplesource2.com'
+      url: 'https://apnews.com'
     }
   ]
 
-  const [articles, setArticles] = useState(exampleArticles)
+  const [articles] = useState(exampleArticles)
 
   const filteredArticles =
     sourceFilter === 'All'
       ? articles
-      : articles.filter(
-          (article) => article.source === sourceFilter
-        )
+      : articles.filter((article) => article.source === sourceFilter)
 
   function handleSearch() {
-    if (!searchTerm || !startDate || !endDate) {
+    if (!searchTerm.trim() || !startDate || !endDate) {
       setError('Please fill in all fields.')
       setSubmittedResults(null)
       return
@@ -59,10 +62,11 @@ function SearchSection() {
     setError('')
     setLoading(true)
 
+    // Temporary mock search until backend integration
     setSubmittedResults({
-      searchTerm: searchTerm,
-      startDate: startDate,
-      endDate: endDate
+      searchTerm: searchTerm.trim(),
+      startDate,
+      endDate
     })
 
     setLoading(false)
@@ -72,20 +76,25 @@ function SearchSection() {
     <section className="search-section">
       <div className="search-content">
 
-        {/* HERO */}
+        {/* =========================
+            HERO SEARCH DASHBOARD
+           ========================= */}
+
         <div className="hero-layout">
 
-          {/* SEARCH PANEL */}
           <div className="search-panel">
+            <p className="eyebrow">INTERFACE CONCEPT</p>
 
             <h1>
-              Compare perspectives. Uncover the differences.
+              Compare perspectives.
+              <br />
+              Uncover the differences.
             </h1>
 
             <p className="search-description">
-              Search a news topic to compare how different sources
-              frame the same story, identify tone differences, and
-              track how coverage evolves over time.
+              Explore how different news sources cover the same
+              story. Compare perspectives, identify potential bias,
+              and track how narratives develop over time.
             </p>
 
             <div className="search-bar">
@@ -93,9 +102,12 @@ function SearchSection() {
                 type="text"
                 placeholder="Search a news topic..."
                 value={searchTerm}
-                onChange={(event) =>
-                  setSearchTerm(event.target.value)
-                }
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    handleSearch()
+                  }
+                }}
               />
 
               <button onClick={handleSearch}>
@@ -104,58 +116,37 @@ function SearchSection() {
             </div>
 
             <div className="date-filters">
-              <div className="date-field">
-                <label htmlFor="start-date">
-                  From
-                </label>
-
+              <div className="filter-group">
+                <label htmlFor="start-date">From</label>
                 <input
-                  type="date"
                   id="start-date"
-                  value={startDate}
-                  onChange={(event) =>
-                    setStartDate(event.target.value)
-                  }
-                />
-              </div>
-
-              <div className="date-field">
-                <label htmlFor="end-date">
-                  To
-                </label>
-
-                <input
                   type="date"
-                  id="end-date"
-                  value={endDate}
-                  onChange={(event) =>
-                    setEndDate(event.target.value)
-                  }
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
                 />
               </div>
 
-              <div className="date-field">
-                <label htmlFor="source-filter">
-                  Source
-                </label>
+              <div className="filter-group">
+                <label htmlFor="end-date">To</label>
+                <input
+                  id="end-date"
+                  type="date"
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                />
+              </div>
 
+              <div className="filter-group">
+                <label htmlFor="source-filter">Source</label>
                 <select
                   id="source-filter"
                   value={sourceFilter}
-                  onChange={(event) =>
-                    setSourceFilter(event.target.value)
-                  }
+                  onChange={(e) => setSourceFilter(e.target.value)}
                 >
-                  <option value="All">
-                    All Sources
-                  </option>
-
-                  <option value="example source">
-                    example source
-                  </option>
-
-                  <option value="example source 2">
-                    example source 2
+                  <option value="All">All Sources</option>
+                  <option value="Reuters">Reuters</option>
+                  <option value="Associated Press">
+                    Associated Press
                   </option>
                 </select>
               </div>
@@ -169,75 +160,47 @@ function SearchSection() {
             </div>
           </div>
 
-          {/* METRIC CARDS */}
+          {/* DASHBOARD METRICS */}
+
           <div className="metric-column">
-
             <div className="metric-card">
               <span className="metric-label">
-                METRIC
+                SOURCES COMPARED
               </span>
-
-              <strong>
-                {articles.length}
-              </strong>
-
-              <p>Sources compared</p>
-
-              <span className="metric-description">
-                interface data
-              </span>
+              <h2>{submittedResults ? filteredArticles.length : 0}</h2>
+              <p>News articles available for comparison</p>
             </div>
 
             <div className="metric-card">
               <span className="metric-label">
-                METRIC
+                DIFFERENCES DETECTED
               </span>
-
-              <strong>
-                {submittedResults ? 3 : 0}
-              </strong>
-
-              <p>Differences detected</p>
-
-              <span className="metric-description">
-                insight summaries
-              </span>
+              <h2>{submittedResults ? 3 : 0}</h2>
+              <p>Example analysis metric</p>
             </div>
 
             <div className="metric-card">
               <span className="metric-label">
-                METRIC
+                TIMELINE POINTS
               </span>
-
-              <strong>
-                {submittedResults
-                  ? filteredArticles.length
-                  : 0}
-              </strong>
-
-              <p>Timeline points</p>
-
-              <span className="metric-description">
-                Narrative stages found
-              </span>
+              <h2>{submittedResults ? filteredArticles.length : 0}</h2>
+              <p>Articles in the current timeline</p>
             </div>
-
           </div>
         </div>
 
-        {/* ERROR */}
+        {/* =========================
+            SEARCH FEEDBACK
+           ========================= */}
+
         {error && (
-          <p className="error-message">
-            {error}
-          </p>
+          <p className="error-message">{error}</p>
         )}
 
-        {/* LOADING */}
         {loading && (
           <p>Searching articles...</p>
         )}
 
-        {/* NO RESULTS */}
         {!loading &&
           submittedResults &&
           filteredArticles.length === 0 && (
@@ -246,57 +209,56 @@ function SearchSection() {
             </p>
           )}
 
-        {/* RESULTS */}
-        {submittedResults && (
+        {/* =========================
+            ARTICLE CAROUSEL
+           ========================= */}
+
+        {submittedResults && filteredArticles.length > 0 && (
+          <ArticleCarousel articles={filteredArticles} />
+        )}
+
+        {/* =========================
+            RESULTS DASHBOARD
+           ========================= */}
+
+        {submittedResults && filteredArticles.length > 0 && (
           <div className="results-area">
 
-            <div className="submitted-results">
-              <h2>Search Results</h2>
+            {/* SIDE-BY-SIDE ARTICLE COMPARISON */}
 
-              <p>
-                Showing results for:{' '}
-                <strong>
-                  {submittedResults.searchTerm}
-                </strong>
-              </p>
+            <div className="comparison-articles-section" id="compare">
+              <h2>Compare News Coverage</h2>
 
-              <p>
-                Date range:{' '}
-                {submittedResults.startDate} to{' '}
-                {submittedResults.endDate}
-              </p>
+              <div className="article-cards">
+                {filteredArticles.map((article) => (
+                  <ArticleCard
+                    key={article.headline}
+                    source={article.source}
+                    headline={article.headline}
+                    summary={article.summary}
+                    sentiment={article.sentiment}
+                    perspective={article.perspective}
+                    publishedDate={article.publishedDate}
+                    url={article.url}
+                    politicalLeaning={article.politicalLeaning}
+                  />
+                ))}
+              </div>
             </div>
 
-            <ComparisonSummary
-              articles={filteredArticles}
-            />
+            {/* ANALYSIS COMPONENTS SIDE BY SIDE */}
 
-            <BiasCoverage
-                articles={filteredArticles}
-            />
-            
-            <Timeline
-              articles={filteredArticles}
-            />
-
-            <div className="article-cards">
-              {filteredArticles.map((article) => (
-                <ArticleCard
-                  key={article.headline}
-                  source={article.source}
-                  headline={article.headline}
-                  summary={article.summary}
-                  sentiment={article.sentiment}
-                  perspective={article.perspective}
-                  publishedDate={article.publishedDate}
-                  url={article.url}
-                />
-              ))}
+            <div className="analysis-grid">
+              <ComparisonSummary articles={filteredArticles} />
+              <BiasCoverage articles={filteredArticles} />
             </div>
+
+            {/* NARRATIVE TIMELINE */}
+
+            <Timeline articles={filteredArticles} />
 
           </div>
         )}
-
       </div>
     </section>
   )

@@ -1,3 +1,4 @@
+import PoliticalLeaningIndicator from './PoliticalLeaningIndicator'
 function ArticleCard({
   source,
   headline,
@@ -5,7 +6,8 @@ function ArticleCard({
   sentiment,
   perspective,
   publishedDate,
-  url
+  url,
+  politicalLeaning
 }) {
   return (
     <article className="article-card">
@@ -30,6 +32,10 @@ function ArticleCard({
           <span>Sentiment</span>
           <strong>{sentiment}</strong>
         </div>
+
+        <PoliticalLeaningIndicator
+          leaning={politicalLeaning}
+        />
 
         <div className="analysis-box">
           <span>Perspective</span>
