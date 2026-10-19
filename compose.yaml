@@ -58,6 +58,22 @@ services:
       retries: 8
       start_period: 60s
 
+  ml-api:
+    build:
+      context: ./services/ml-api
+    restart: unless-stopped
+    expose:
+      - "8000"
+    mem_limit: ${ML_MEM_LIMIT:-2g}
+    cpus: ${ML_CPUS:-1.0}
+    logging: *logging
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
 volumes:
   caddy_data:
   caddy_config:

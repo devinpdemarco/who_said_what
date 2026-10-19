@@ -4,7 +4,7 @@ Owner: Xiaopei. This is the team's development environment.
 
 ## Architecture and access
 
-Ubuntu 24.04 on EC2 runs Docker Compose: Caddy serves HTTPS and forwards to n8n over the Compose network. The n8n host binding is `127.0.0.1:5678`; do not expose this port publicly. Named volumes retain n8n data and Caddy certificates. The old `infra/nginx` files are unused historical bootstrap assets.
+Ubuntu 24.04 on EC2 runs Docker Compose. Caddy serves HTTPS, forwards `/api/ml/*` requests to the internal ML API, and forwards all other requests to n8n. The n8n host binding is `127.0.0.1:5678`; do not expose this port publicly. The ML API has no host port. Named volumes retain n8n data and Caddy certificates. The old `infra/nginx` files are unused historical bootstrap assets.
 
 Open https://whosaidwhat-n8n.duckdns.org and sign in with your n8n account. Devin can work in the editor without SSH or AWS console access. Workflow changes are stored in the n8n database, independently of Git. Export workflows for version control after removing sensitive content; pulling JSON files does not import them automatically.
 
@@ -33,6 +33,16 @@ sudo docker compose ps
 curl -f https://whosaidwhat-n8n.duckdns.org/healthz
 ```
 
+The ML adapter can be checked through Caddy:
+
+```sh
+curl -f https://whosaidwhat-n8n.duckdns.org/api/ml/health
+```
+
+Until Kynnedy's pipeline is connected, `/api/ml/analyze` intentionally returns
+HTTP 503. It does not return mock sentiment or bias values that could be
+mistaken for real analysis.
+
 The n8n image is digest-pinned; Caddy currently uses `caddy:2-alpine`. Pulling Caddy can update its version. Back up and schedule service changes with teammates before upgrades.
 
 ## Routine updates
@@ -49,7 +59,7 @@ sudo docker compose up -d --build --wait --wait-timeout 180
 sudo docker compose ps
 ```
 
-This can recreate changed services: coordinate with teammates using n8n. There is no automatic deployment pipeline. Frontend and ML need their Dockerfiles and Compose integration before these commands can deploy them.
+This can recreate changed services: coordinate with teammates using n8n. There is no automatic deployment pipeline. The ML adapter is containerized, but Kynnedy's real pipeline and the frontend still need to be integrated.
 
 For read-only checks:
 
@@ -70,7 +80,8 @@ Required school resource tag: `Group=Who_Said_What`. Only manage this team's res
 ## Remaining integrations
 
 - Devin: n8n workflows; Nidya: Supabase schema and connection requirements.
-- Ben: frontend runtime and build requirements; Kynnedy: ML runtime and interface.
+- Ben: frontend runtime and build requirements.
+- Kynnedy: provide the pipeline's Python entry point, input/output types, dependency versions and required model artifacts. The infrastructure contract currently accepts a non-empty list of articles containing `title`, `url`, `source` and `cleaned_text`.
 - Xiaopei: integrate services, add off-host backups, deployment automation and measured resource/load tests.
 
 ## Verification on September 23, 2026

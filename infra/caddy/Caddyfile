@@ -1,5 +1,11 @@
 whosaidwhat-n8n.duckdns.org {
-    reverse_proxy n8n:5678
+    handle_path /api/ml/* {
+        reverse_proxy ml-api:8000
+    }
+
+    handle {
+        reverse_proxy n8n:5678
+    }
 }
 
 :80 {
