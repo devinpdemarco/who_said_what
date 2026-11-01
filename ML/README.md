@@ -1,7 +1,7 @@
-# Article Clustering and RNN Sentiment Analysis
+# Article Clustering and Sentiment Analysis
 
 ## Overview
-The machine learning pipeline will consist of clustering, keyword extraction, and RNN sentiment scoring to effectively analyze different articles and group them based on similarities in their sentiments, wording, and potential biases.
+The machine learning pipeline will consist of clustering, keyword extraction, and sentiment scoring to effectively analyze different articles and group them based on similarities in their sentiments, wording, and potential biases.
 
 ## Steps
 1. Text Preprocessing
@@ -12,7 +12,7 @@ The machine learning pipeline will consist of clustering, keyword extraction, an
 6. Bias Analysis
 
 ## Run and Test Instructions
-Run main.py to see current keyword extractions over a set of mock data from scikit-learn's 20newsgroup dataset.
+Run main.py to see current clustering and sentiment analysis results over a set of curated mock data that mimics news articles syntax and topics.
 
 ## Status
 Currently Implemented:
@@ -20,7 +20,7 @@ Currently Implemented:
 - Sentence Transformer embeddings
 - K-Means clustering
 - YAKE keyword extraction 
+- Sentiment Analysis
 
 In Development:
-- Sentiment Model
 - Bias Model

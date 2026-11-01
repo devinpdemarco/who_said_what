@@ -23,3 +23,16 @@ def preprocess_data(data):
         data[i] = doc.lower().strip()
     
     return data
+
+# put data in the format matching nidya's data pipeline
+def structure_data(data):
+    articles = []
+    for i, doc in enumerate(data):
+        articles.append(
+            {
+                'id':i,
+                'cleaned_text':doc
+            }
+        )
+
+    return articles
