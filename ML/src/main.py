@@ -1,35 +1,62 @@
-from sklearn.datasets import fetch_20newsgroups
 from preprocessing import preprocess_data, structure_data
 from embeddings import create_embeddings
-from clustering import create_clusters, package_cluster_info
+from clustering import find_best_k, create_clusters, package_cluster_info
 from keyword_extraction import extract_keywords
 from analyze_sentiment import run_sentiment_analysis
 
 import numpy as np
-
-# loading test data
 import json
-with open('ML/news_sentiment_20_labeled.json', 'r', encoding='utf-8') as file:
-    articles = json.load(file)
+''' uncomment this when integrating with data pipeline
+import os
+from supabase import create_client
+'''
 
-data = []
+def load_dev_test_data():
+    with open('ML/news_sentiment_20_labeled.json', 'r', encoding='utf-8') as file:
+        articles = json.load(file)
 
-for doc in articles:
-    data.append(
-        doc['text']
-	)
+        data = []
+
+        for doc in articles:
+            data.append(
+                doc['text']
+            )
+
+    return data
 
 '''
-# data import
-# importing sample categories from train data
-sample_categories = ['soc.religion.christian', 'sci.space', 'sci.med']
-# only doing one category for now to ensure that the clusters make sense
-ng_train = fetch_20newsgroups(subset='train',
-                            categories=sample_categories[:3],
-                            remove=('headers', 'footers', 'quotes'),
-                            random_state=42
-                            )
+for integration with data pipeline
+uncomment when ready to integrate
+
+def load_articles():
+    client = create_client(
+        os.environ['SUPABASE_URL']
+        os.environ['SUPABASE_KEY']
+    )
+
+    response = (
+        client.table('articles')
+        .select('id', 'title', 'cleaned_text')
+        .limit(20)
+        .execute()
+    )
+
+    return [
+        {
+            'id' : str(row['id']),
+            'title' : row['title'],
+            'text' : row['cleaned_text']
+        }
+
+        for row in response.data
+    ]
+
+    
+articles = load_articles()
 '''
+
+# for development and testing ML pipeline
+data = load_dev_test_data()
 
 
 # preprocessing data
@@ -58,9 +85,8 @@ table name is articles
 embeddings = create_embeddings(data)
 
 # create clusters using k-means
-# will determine a better algorithm to determine how to decide preset number of clusters
-# using three for now to work with the mock data
-labels, km = create_clusters(embeddings, 3)
+k = find_best_k(embeddings)
+labels = create_clusters(embeddings, k)
 
 # discarding clusters for keyword extraction if not sufficient data for extraction
 # may change this later
