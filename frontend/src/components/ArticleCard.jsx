@@ -33,15 +33,13 @@ function ArticleCard({
           <strong>{sentiment}</strong>
         </div>
 
-        <PoliticalLeaningIndicator
-          leaning={politicalLeaning}
-        />
-
         <div className="analysis-box">
           <span>Perspective</span>
           <strong>{perspective}</strong>
         </div>
       </div>
+
+      <PoliticalLeaningIndicator leaning={politicalLeaning} />
 
       <a
         className="article-link"

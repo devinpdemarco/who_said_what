@@ -1,4 +1,3 @@
-// ArticleCarousel component for displaying a carousel of articles
 import { useState } from 'react'
 import PoliticalLeaningIndicator from './PoliticalLeaningIndicator'
 
@@ -9,14 +8,15 @@ function ArticleCarousel({ articles }) {
     return null
   }
 
-  const article = articles[currentIndex]
+  const safeIndex = Math.min(currentIndex, articles.length - 1)
+  const article = articles[safeIndex]
 
   return (
     <section className="article-carousel">
       <div className="carousel-header">
         <h2>Browse Articles</h2>
         <span>
-          {currentIndex + 1} of {articles.length}
+          {safeIndex + 1} of {articles.length}
         </span>
       </div>
 
@@ -36,15 +36,15 @@ function ArticleCarousel({ articles }) {
 
       <div className="carousel-navigation">
         <button
-          disabled={currentIndex === 0}
-          onClick={() => setCurrentIndex(currentIndex - 1)}
+          disabled={safeIndex === 0}
+          onClick={() => setCurrentIndex(safeIndex - 1)}
         >
           ← Previous
         </button>
 
         <button
-          disabled={currentIndex === articles.length - 1}
-          onClick={() => setCurrentIndex(currentIndex + 1)}
+          disabled={safeIndex === articles.length - 1}
+          onClick={() => setCurrentIndex(safeIndex + 1)}
         >
           Next →
         </button>

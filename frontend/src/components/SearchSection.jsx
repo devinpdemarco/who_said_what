@@ -13,7 +13,6 @@ function SearchSection() {
   const [sourceFilter, setSourceFilter] = useState('All')
   const [submittedResults, setSubmittedResults] = useState(null)
   const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
 
   // Temporary mock data until the backend is connected
   const exampleArticles = [
@@ -60,7 +59,6 @@ function SearchSection() {
     }
 
     setError('')
-    setLoading(true)
 
     // Temporary mock search until backend integration
     setSubmittedResults({
@@ -69,7 +67,6 @@ function SearchSection() {
       endDate
     })
 
-    setLoading(false)
   }
 
   return (
@@ -83,7 +80,7 @@ function SearchSection() {
         <div className="hero-layout">
 
           <div className="search-panel">
-            <p className="eyebrow">INTERFACE CONCEPT</p>
+<p className="eyebrow">News Comparison /</p>
 
             <h1>
               Compare perspectives.
@@ -153,7 +150,7 @@ function SearchSection() {
             </div>
 
             <div className="feature-tags">
-              <span>Bias markers</span>
+              <span>Article-level leaning</span>
               <span>Perspective comparison</span>
               <span>Timeline tracking</span>
               <span>Coverage gaps</span>
@@ -165,18 +162,18 @@ function SearchSection() {
           <div className="metric-column">
             <div className="metric-card">
               <span className="metric-label">
-                SOURCES COMPARED
+                ARTICLES FOUND
               </span>
               <h2>{submittedResults ? filteredArticles.length : 0}</h2>
-              <p>News articles available for comparison</p>
+              <p>Articles in the current selection</p>
             </div>
 
             <div className="metric-card">
               <span className="metric-label">
-                DIFFERENCES DETECTED
+                SENTIMENT LABELS
               </span>
-              <h2>{submittedResults ? 3 : 0}</h2>
-              <p>Example analysis metric</p>
+              <h2>{submittedResults ? new Set(filteredArticles.map(article => article.sentiment)).size : 0}</h2>
+              <p>Distinct sentiment labels in demo data</p>
             </div>
 
             <div className="metric-card">
@@ -184,7 +181,7 @@ function SearchSection() {
                 TIMELINE POINTS
               </span>
               <h2>{submittedResults ? filteredArticles.length : 0}</h2>
-              <p>Articles in the current timeline</p>
+              <p>Published entries in the demo timeline</p>
             </div>
           </div>
         </div>
@@ -197,12 +194,7 @@ function SearchSection() {
           <p className="error-message">{error}</p>
         )}
 
-        {loading && (
-          <p>Searching articles...</p>
-        )}
-
-        {!loading &&
-          submittedResults &&
+        {submittedResults &&
           filteredArticles.length === 0 && (
             <p className="no-result">
               No articles found for the given search criteria.
@@ -226,8 +218,23 @@ function SearchSection() {
 
             {/* SIDE-BY-SIDE ARTICLE COMPARISON */}
 
+            <div className="results-heading">
+              <div>
+                <p className="section-kicker">YOUR ANALYSIS WORKSPACE</p>
+                <h2>Coverage, side by side.</h2>
+                <p>Explore the example articles and compare how each source approaches the story.</p>
+              </div>
+              <span className="results-count">{filteredArticles.length} articles</span>
+            </div>
+
             <div className="comparison-articles-section" id="compare">
-              <h2>Compare News Coverage</h2>
+              <div className="section-heading">
+                <div>
+                  <p className="section-kicker">01 / ARTICLE COMPARISON</p>
+                  <h2>Compare news coverage</h2>
+                </div>
+                <span className="section-note">Individual source analysis</span>
+              </div>
 
               <div className="article-cards">
                 {filteredArticles.map((article) => (
@@ -248,6 +255,13 @@ function SearchSection() {
 
             {/* ANALYSIS COMPONENTS SIDE BY SIDE */}
 
+            <div className="section-heading analysis-heading">
+              <div>
+                <p className="section-kicker">02 / KEY FINDINGS</p>
+                <h2>What stands out?</h2>
+              </div>
+              <span className="section-note">A closer look at differences</span>
+            </div>
             <div className="analysis-grid">
               <ComparisonSummary articles={filteredArticles} />
               <BiasCoverage articles={filteredArticles} />
@@ -255,7 +269,15 @@ function SearchSection() {
 
             {/* NARRATIVE TIMELINE */}
 
-            <Timeline articles={filteredArticles} />
+            <div className="timeline-wrap">
+              <div className="section-heading">
+                <div>
+                  <p className="section-kicker">03 / STORY PROGRESSION</p>
+                  <h2>Follow the timeline</h2>
+                </div>
+              </div>
+              <Timeline articles={filteredArticles} />
+            </div>
 
           </div>
         )}
