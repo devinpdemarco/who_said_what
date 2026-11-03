@@ -1,4 +1,8 @@
+
 import os
+from dataclasses import asdict, is_dataclass
+from datetime import datetime
+
 from dotenv import load_dotenv
 from supabase import create_client
 
@@ -12,7 +16,27 @@ if not url or not key:
 
 supabase = create_client(url, key)
 
-response = supabase.table("articles").select("*").limit(5).execute()
 
-print("Successfully accessed articles table!")
-print(response.data)
+def save_articles(articles):
+    """Save valid processed articles to Supabase."""
+
+    if not articles:
+        print("No articles to save.")
+        return []
+
+    rows = []
+
+    for article in articles:
+        row = asdict(article) if is_dataclass(article) else article.copy()
+
+        published_date = row.get("published_date")
+
+        if isinstance(published_date, datetime):
+            row["published_date"] = published_date.isoformat()
+
+        rows.append(row)
+
+    response = supabase.table("articles").insert(rows).execute()
+
+    print(f"Successfully saved {len(response.data)} articles!")
+    return response.data
