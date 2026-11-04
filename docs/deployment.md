@@ -4,9 +4,11 @@ Owner: Xiaopei. This is the team's development environment.
 
 ## Architecture and access
 
-Ubuntu 24.04 on EC2 runs Docker Compose. Caddy serves HTTPS, forwards `/api/ml/*` requests to the internal ML API, and forwards all other requests to n8n. The n8n host binding is `127.0.0.1:5678`; do not expose this port publicly. The ML API has no host port. Named volumes retain n8n data and Caddy certificates. The old `infra/nginx` files are unused historical bootstrap assets.
+Ubuntu 24.04 on EC2 runs Docker Compose. Caddy serves HTTPS for two hostnames: `whosaidwhat.duckdns.org` routes to the frontend container, while `whosaidwhat-n8n.duckdns.org` routes to n8n and sends `/api/ml/*` to the internal ML API. The n8n host binding is `127.0.0.1:5678`; do not expose this port publicly. The frontend and ML API have no host ports. Named volumes retain n8n data and Caddy certificates. The old `infra/nginx` files are unused historical bootstrap assets.
 
 Open https://whosaidwhat-n8n.duckdns.org and sign in with your n8n account. Devin can work in the editor without SSH or AWS console access. Workflow changes are stored in the n8n database, independently of Git. Export workflows for version control after removing sensitive content; pulling JSON files does not import them automatically.
+
+Open https://whosaidwhat.duckdns.org for the frontend after the DuckDNS record points to the EC2 public IP. The frontend currently displays mock search results until its request contract is connected to Devin's n8n webhook.
 
 The instance is `Who_Said_What` (`i-0b8b92301be98a6dc`) in Ohio. It has 4 GiB RAM, 30 GiB gp3 storage and 4 GiB swap. The last verified public IP was `3.137.137.57` on September 23, 2026. This is not an Elastic IP: after stop/start, confirm the new IP and update DuckDNS manually. No automatic DNS updater is configured.
 
@@ -22,15 +24,16 @@ AWS IAM access does not itself grant SSH or n8n login access.
 
 The server checkout is `/home/ubuntu/who_said_what`. The shared integration branch is `dev`.
 
-For a fresh deployment only, create `.env` from `.env.example`, generate a key with `openssl rand -hex 32`, and set `N8N_ENCRYPTION_KEY`. Restrict `.env` to mode 600. On an existing deployment, retain its original key: saved credentials depend on it. Never commit this file.
+For a fresh deployment only, create `.env` from `.env.example`, generate a key with `openssl rand -hex 32`, and set `N8N_ENCRYPTION_KEY`. Set `APP_DOMAIN=whosaidwhat.duckdns.org`, or replace it with the frontend hostname you created. Restrict `.env` to mode 600. On an existing deployment, retain its original encryption key: saved credentials depend on it. Never commit this file.
 
-Before a fresh deployment, point DuckDNS to the instance and allow inbound TCP 80 and 443. Keep SSH 22 limited to approved source IPs. Complete owner setup before sharing a newly initialized n8n instance.
+Before deploying the frontend, sign in to DuckDNS, create the `whosaidwhat` subdomain, and point it to the same EC2 public IP used by `whosaidwhat-n8n`. Allow inbound TCP 80 and 443. Keep SSH 22 limited to approved source IPs. If the EC2 public IP changes after a stop/start, update both DuckDNS records before restarting Caddy.
 
 ```sh
 sudo docker compose config --quiet
 sudo docker compose up -d --wait --wait-timeout 180
 sudo docker compose ps
 curl -f https://whosaidwhat-n8n.duckdns.org/healthz
+curl -f https://whosaidwhat.duckdns.org/healthz
 ```
 
 The ML adapter can be checked through Caddy:
@@ -59,7 +62,7 @@ sudo docker compose up -d --build --wait --wait-timeout 180
 sudo docker compose ps
 ```
 
-This can recreate changed services: coordinate with teammates using n8n. There is no automatic deployment pipeline. The ML adapter is containerized, but Kynnedy's real pipeline and the frontend still need to be integrated.
+This can recreate changed services: coordinate with teammates using n8n. There is no automatic deployment pipeline. The frontend is containerized, but its search still needs Devin's n8n webhook contract. The ML adapter is containerized, but Kynnedy's real pipeline still needs to be integrated.
 
 For read-only checks:
 
@@ -80,10 +83,12 @@ Required school resource tag: `Group=Who_Said_What`. Only manage this team's res
 ## Remaining integrations
 
 - Devin: n8n workflows; Nidya: Supabase schema and connection requirements.
-- Ben: frontend runtime and build requirements.
+- Ben: replace frontend mock search with the agreed n8n API request and response.
 - Kynnedy: provide the pipeline's Python entry point, input/output types, dependency versions and required model artifacts. The infrastructure contract currently accepts a non-empty list of articles containing `title`, `url`, `source` and `cleaned_text`.
 - Xiaopei: integrate services, add off-host backups, deployment automation and measured resource/load tests.
 
-## Verification on September 23, 2026
+## Verification history
 
-Compose configuration and Caddy validation passed. Both running services were healthy; public HTTPS returned 200 and `/healthz` returned `{"status":"ok"}`. Saving and merging this configuration does not require restarting containers or changing the n8n database.
+On September 23, 2026, Compose configuration and Caddy validation passed. Both running services were healthy; public HTTPS returned 200 and `/healthz` returned `{"status":"ok"}`.
+
+On November 3, 2026, the frontend lint and production build passed locally. Docker image and Caddy validation must be run on the Docker-enabled EC2 host before the frontend deployment is considered verified.

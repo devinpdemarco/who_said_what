@@ -10,6 +10,8 @@ services:
   web:
     image: caddy:2-alpine
     restart: unless-stopped
+    environment:
+      APP_DOMAIN: ${APP_DOMAIN:-whosaidwhat.duckdns.org}
     ports:
       - "80:80"
       - "443:443"
@@ -73,6 +75,22 @@ services:
       timeout: 5s
       retries: 5
       start_period: 15s
+
+  frontend:
+    build:
+      context: ./frontend
+    restart: unless-stopped
+    expose:
+      - "8080"
+    mem_limit: ${FRONTEND_MEM_LIMIT:-128m}
+    cpus: ${FRONTEND_CPUS:-0.25}
+    logging: *logging
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8080/healthz"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
 volumes:
   caddy_data:
