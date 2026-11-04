@@ -1,8 +1,16 @@
 
+import os
+
+import pytest
+
 from data_pipeline.pipeline import process_articles
 from supabase_client import save_articles
 
 
+@pytest.mark.skipif(
+    not os.getenv("SUPABASE_URL") or not os.getenv("SUPABASE_KEY"),
+    reason="Supabase credentials are not configured",
+)
 def test_save_processed_articles():
     raw_articles = [
         {

@@ -1,15 +1,13 @@
 # source: https://huggingface.co/sztal/erc-newsuse-valence
 
 # load model
+from functools import lru_cache
+
 from transformers import AutoModel, AutoTokenizer, pipeline
 
-def predict_sentiment(text):
-    LABELS = {
-        -1 : 'negative',
-        0 : 'neutral',
-        1 : 'positive'
-    }
 
+@lru_cache(maxsize=1)
+def get_classifier():
     model_name = 'sztal/erc-newsuse-valence'
 
     # downloads pretrained model
@@ -24,12 +22,21 @@ def predict_sentiment(text):
     )
 
     # wraps the model and tokenizer into a reusable inference interface
-    classifier = pipeline(
+    return pipeline(
         'text-multi-classification',
         model=model,
         tokenizer=tokenizer
     )
 
+
+def predict_sentiment(text):
+    LABELS = {
+        -1 : 'negative',
+        0 : 'neutral',
+        1 : 'positive'
+    }
+
+    classifier = get_classifier()
     result = classifier(text, truncation=True, max_length=512)
     prediction = result['sentiment']
 

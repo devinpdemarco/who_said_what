@@ -8,16 +8,18 @@ from supabase import create_client
 
 load_dotenv()
 
-url = os.getenv("SUPABASE_URL")
-key = os.getenv("SUPABASE_KEY")
 
-if not url or not key:
-    raise ValueError("Missing SUPABASE_URL or SUPABASE_KEY in .env")
+def get_client():
+    url = os.getenv("SUPABASE_URL")
+    key = os.getenv("SUPABASE_KEY")
 
-supabase = create_client(url, key)
+    if not url or not key:
+        raise ValueError("Missing SUPABASE_URL or SUPABASE_KEY")
+
+    return create_client(url, key)
 
 
-def save_articles(articles):
+def save_articles(articles, client=None):
     """Save valid processed articles to Supabase."""
 
     if not articles:
@@ -36,7 +38,8 @@ def save_articles(articles):
 
         rows.append(row)
 
-    response = supabase.table("articles").insert(rows).execute()
+    database = client or get_client()
+    response = database.table("articles").insert(rows).execute()
 
     print(f"Successfully saved {len(response.data)} articles!")
     return response.data

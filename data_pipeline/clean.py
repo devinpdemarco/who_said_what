@@ -3,9 +3,9 @@ from bs4 import BeautifulSoup
 
 
 def clean_text(text: str) -> str:
-    
+
     #Clean article text by removing HTML, URLs, and unnecessary whitespace.
-    
+
     if not text:
         return ""
 

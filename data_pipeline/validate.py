@@ -13,7 +13,7 @@ REQUIRED_FIELDS = [
 
 def validate_article(article: Article) -> bool:
     #Check whether an article contains all required fields.
-    
+
 
     for field in REQUIRED_FIELDS:
         value = getattr(article, field, None)

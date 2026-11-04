@@ -1,5 +1,10 @@
-.venv/
-__pycache__/
-*.pyc
 .env
-ML/src/__pycache__/
+.env.*
+!.env.example
+*.pem
+backups/
+.DS_Store
+__pycache__/
+.pytest_cache/
+*.py[cod]
+.venv/

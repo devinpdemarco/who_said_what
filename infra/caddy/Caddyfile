@@ -1,0 +1,17 @@
+whosaidwhat-n8n.duckdns.org {
+    handle_path /api/ml/* {
+        reverse_proxy ml-api:8000
+    }
+
+    handle {
+        reverse_proxy n8n:5678
+    }
+}
+
+{$APP_DOMAIN:whosaidwhat.duckdns.org} {
+    reverse_proxy frontend:8080
+}
+
+:80 {
+    respond /healthz "ok" 200
+}

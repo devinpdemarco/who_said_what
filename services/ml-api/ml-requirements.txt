@@ -1,0 +1,7 @@
+nltk
+numpy==2.3.5
+scikit-learn
+scipy==1.16.2
+sentence-transformers
+transformers==4.45.2
+yake
