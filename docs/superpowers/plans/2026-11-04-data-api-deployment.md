@@ -26,7 +26,7 @@
 
 ### Task 3: Deploy and verify
 
-- [ ] Add `SUPABASE_URL` and `SUPABASE_KEY` to the EC2 `.env` file.
-- [ ] Build and start only `data-api` without restarting existing services.
-- [ ] Send a real article through the service and confirm the returned Supabase row.
-- [ ] Confirm all Compose services remain healthy.
+- [x] Add `SUPABASE_URL` and `SUPABASE_KEY` to the EC2 `.env` file.
+- [x] Build and start only `data-api` without restarting existing services.
+- [x] Send a real article through the service and confirm the returned Supabase row.
+- [x] Confirm all Compose services remain healthy.
