@@ -26,4 +26,4 @@
 - [x] Add `whosaidwhat.duckdns.org` to Caddy without changing the n8n hostname.
 - [x] Update deployment documentation and the environment example.
 - [x] Commit and push the integration branch.
-- [ ] Fast-forward `dev` to the verified integration commit and push it.
+- [x] Fast-forward `dev` to the verified integration commit and push it.
