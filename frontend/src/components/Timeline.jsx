@@ -20,7 +20,7 @@ function Timeline({ articles }) {
         {sortedArticles.map((article, index) => (
           <div
             className="timeline-item"
-            key={article.headline}
+            key={article.id}
           >
             <div className="timeline-marker">
               {index + 1}
