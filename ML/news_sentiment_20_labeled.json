@@ -1,0 +1,162 @@
+[
+  {
+    "id": "A01",
+    "title": "Community clinic extends evening hours",
+    "text": "A neighborhood clinic has expanded its operating hours after residents reported difficulty scheduling appointments around work. The new schedule includes three evenings each week and a Saturday morning session. Patients who attended the first extended session described the change as a welcome improvement, and staff said early appointment availability has increased.\n\nThe clinic serves an area where many residents work hourly jobs and cannot easily leave during business hours. A scheduling coordinator said the evening slots were added after months of requests from patients who had postponed routine visits. The extension uses a rotating staff schedule, and administrators said they are monitoring demand before deciding whether to make the Saturday session permanent.\n\nAt a recent community meeting, patients described challenges including transportation, childcare and the cost of missing work. Clinic officials emphasized that more appointment hours alone will not eliminate those barriers, but they said the change gives patients another option. Early feedback has been favorable, though the clinic has not yet published data on whether the new hours have reduced missed appointments across its patient population.",
+    "expected_label": "positive",
+    "ambiguity": "clear",
+    "annotation_note": "The language emphasizes a welcome improvement and greater access."
+  },
+  {
+    "id": "A02",
+    "title": "Rail operator reports another signal failure",
+    "text": "Commuters faced substantial delays for the third time this month after a signal failure halted trains during the morning rush. The operator apologized but could not provide a timetable for a permanent repair. Passengers described missed shifts and mounting frustration, while local officials criticized the lack of a credible prevention plan.\n\nThe latest breakdown occurred just before 8 a.m. when the control center reported a problem with equipment that manages train spacing. Crews inspected the affected section, and limited service resumed later in the morning. The agency advised riders to use buses where possible, although several passengers said replacement services were already crowded by the time announcements reached their platforms.\n\nRecords presented at a transport committee meeting show that the same corridor has experienced repeated equipment faults. An agency representative said crews have replaced individual components but are still investigating why failures recur. Commuter groups asked for a written repair plan and clearer notification procedures, saying uncertainty has made it difficult for workers and students to plan reliable journeys. No date for a lasting fix has been announced.",
+    "expected_label": "negative",
+    "ambiguity": "clear",
+    "annotation_note": "Repeated disruptions, frustration, and criticism dominate the framing."
+  },
+  {
+    "id": "A03",
+    "title": "City council schedules zoning hearing",
+    "text": "The city council will hold a public hearing next Tuesday on proposed zoning changes affecting three commercial corridors. Planning staff released a map of the affected parcels and invited written comments through the end of the month. A final vote has not been scheduled, and the proposal remains open to revision.\n\nThe proposed amendments would change permitted building uses, parking requirements and the process for requesting certain exceptions. Planning staff said the hearing is intended to gather comments before the council considers any revisions to the draft. Property owners in the affected corridors received notices, and the planning department has posted a summary and maps at the municipal office.\n\nCouncil members have not taken a position on the proposal as a group. During a preliminary discussion, several members requested information about projected traffic and how existing businesses would be treated under any new rules. The department plans to compile testimony and written submissions into a report for the council. Residents who cannot attend in person may submit comments electronically, according to the notice. The dates of subsequent committee meetings will be announced after the hearing.",
+    "expected_label": "neutral",
+    "ambiguity": "clear",
+    "annotation_note": "Procedural report without evaluative framing."
+  },
+  {
+    "id": "A04",
+    "title": "Library program draws growing participation",
+    "text": "An after-school reading program welcomed more families this fall than organizers expected. Volunteers added a second weekly session to accommodate demand, and parents praised the quiet study space and supportive tutors. Coordinators said they hope the expansion will continue through the winter, pending funding approval.\n\nThe program began with one afternoon of reading assistance and now hosts students from several nearby schools. Coordinators said much of the growth came through recommendations from teachers and families. Volunteers work with small groups on reading comprehension and help students choose books suited to their interests. The library also created a separate area for younger siblings so caregivers can stay during sessions.\n\nParents interviewed at the library described the sessions as a useful supplement to schoolwork, particularly for children who lack quiet study space at home. Staff members said they are recruiting additional volunteers and seeking donated materials to keep pace with interest. The program has not conducted a formal assessment of academic outcomes, but registration and attendance figures show steady participation. Organizers hope to continue offering the expanded schedule through the spring.",
+    "expected_label": "positive",
+    "ambiguity": "clear",
+    "annotation_note": "Praise and unexpectedly strong participation convey a positive outlook."
+  },
+  {
+    "id": "A05",
+    "title": "Water service disruption exposes aging pipes",
+    "text": "A burst water main left several blocks without running water overnight and forced the closure of a nearby elementary school. Repair crews restored partial service by morning, but residents reported repeated failures on the same stretch of pipe. Officials acknowledged that replacement work has been postponed twice due to budget constraints.\n\nPublic works employees excavated a damaged section of pipe and distributed bottled water at a temporary collection point. Several households reported low water pressure even after crews reopened the main, and the city advised residents in the affected zone to follow official updates before using tap water for drinking. School administrators said classes would resume only after the building's water service was checked.\n\nNeighbors said the outage followed months of smaller leaks and repair visits. A city engineer acknowledged that parts of the network are beyond their expected service life but said replacement schedules depend on funding and the condition of nearby infrastructure. Local business owners reported lost sales during the closure, and some residents questioned why preventive work had not happened sooner. The city has opened a review of the incident but has not identified a date for full pipe replacement.",
+    "expected_label": "negative",
+    "ambiguity": "clear",
+    "annotation_note": "Disruption, recurring failures, and postponed repairs dominate."
+  },
+  {
+    "id": "A06",
+    "title": "Research team announces survey timetable",
+    "text": "Researchers will begin collecting responses for a regional transportation survey in November. Participants will be asked about commute times, transportation choices, and access to public transit. The university said aggregated results will be released next spring and individual responses will remain confidential.\n\nThe project will use an online questionnaire alongside paper forms distributed at libraries and community centers. Researchers plan to collect basic trip information, including frequency of travel and typical travel modes. Participation is voluntary, and the university said identifying information will be kept separate from the dataset used for public analysis.\n\nThe research team intends to compare responses across neighborhoods while accounting for differences in age and access to transportation. Organizers said they will publish a methodological summary with the final report so readers can understand the sample and its limitations. Local transit agencies have been invited to review the study questions but will not determine the findings, according to the university. The survey will remain open for six weeks, with a preliminary report expected during the following academic term.",
+    "expected_label": "neutral",
+    "ambiguity": "clear",
+    "annotation_note": "Straightforward description of a planned survey."
+  },
+  {
+    "id": "A07",
+    "title": "Food bank receives new refrigeration equipment",
+    "text": "A local food bank installed energy-efficient refrigerators that will allow volunteers to store more fresh produce and dairy products. Staff celebrated the upgrade as an important step toward serving families more consistently. The equipment was funded by community donations, and the organization expects to reduce food waste during busy distribution weeks.\n\nBefore the upgrade, staff frequently had to turn away donated perishables because the existing cold-storage room was full. The new units were installed with support from a local grant and volunteer electricians. Coordinators expect the additional capacity to make it easier to accept produce from farms and groceries, particularly during weeks when donations arrive in large quantities.\n\nVolunteers said the equipment will allow them to prepare a broader selection of food for distribution instead of relying as heavily on shelf-stable items. The organization has also updated its temperature-monitoring procedures and trained staff on the new system. Officials cautioned that transportation and volunteer availability still affect how much food reaches clients, but described the installation as a meaningful improvement. The food bank plans to track how much additional fresh food it can distribute over the coming months.",
+    "expected_label": "positive",
+    "ambiguity": "clear",
+    "annotation_note": "Celebratory and hopeful reporting on a concrete improvement."
+  },
+  {
+    "id": "A08",
+    "title": "Audit finds gaps in emergency alert system",
+    "text": "An independent audit found that several emergency alerts were sent late or failed to reach residents in a recent test. Reviewers said outdated contact records and inconsistent procedures created avoidable risks. City officials promised changes, but the report described the current system as unreliable during time-sensitive incidents.\n\nThe review examined test alerts across several neighborhoods and found differences in both delivery times and the number of residents reached. Auditors observed that some contact lists had not been updated and that staff members used inconsistent steps when deciding whether to issue a warning. Although the exercise did not involve an actual emergency, the report said these weaknesses could delay instructions during a serious incident.\n\nEmergency management officials accepted most recommendations and announced plans for more frequent drills and clearer responsibility assignments. However, the audit noted that earlier improvement proposals remained unfinished, raising questions about whether the new commitments will be carried through. Community groups requested a public timetable for changes and an explanation of how residents can verify that their contact information is current. The city said progress reports will be presented at future council meetings.",
+    "expected_label": "negative",
+    "ambiguity": "clear",
+    "annotation_note": "Clear criticism and risk-focused wording."
+  },
+  {
+    "id": "A09",
+    "title": "Museum announces exhibition dates",
+    "text": "The regional museum announced that its photography exhibition will open on December 4 and run for six weeks. The show will include work from artists across the state, with guided tours available on weekends. Tickets will go on sale next Monday, according to the museum’s event calendar.\n\nCurators said the exhibition will feature documentary, landscape and portrait photography selected from submissions received earlier this year. The museum plans to publish an artist list before opening day, along with information about accessibility arrangements and school visits. Some works will be displayed in the main gallery, while a smaller selection will appear in a rotating digital presentation.\n\nThe museum has scheduled weekend tours led by education staff, and visitors may reserve places online or at the front desk. Admission prices will follow the institution's usual ticket policy. Organizers said the exhibition is part of a seasonal program that also includes lectures and workshops, with details to be announced separately. Installation will begin after the current show closes, and the building will remain open during most of the changeover.",
+    "expected_label": "neutral",
+    "ambiguity": "clear",
+    "annotation_note": "Event logistics with little explicit sentiment."
+  },
+  {
+    "id": "A10",
+    "title": "Small businesses welcome streamlined permits",
+    "text": "New licensing procedures reduced the number of forms required for certain small businesses, according to the city’s business office. Several owners said the simpler process removed an unnecessary headache and made it easier to plan openings. The city will review application volumes after the first quarter to determine whether further changes are needed.\n\nUnder the revised procedure, applicants can provide certain documents through one online form instead of submitting the same information to multiple offices. A bakery owner who recently applied for a permit said the changes made the requirements easier to understand and reduced uncertainty about next steps. Business associations had previously asked the city to clarify which approvals were needed before opening a new location.\n\nThe city said inspections and safety checks will remain in place, and applications that involve specialized permits may still require additional reviews. Officials have not yet released a comprehensive comparison of processing times before and after the change. Several owners said the simpler forms are encouraging, although they want to see whether approval times improve consistently. The business office plans to review application data after the first full quarter of the new procedure.",
+    "expected_label": "positive",
+    "ambiguity": "moderate",
+    "annotation_note": "The topic is administrative, but approval and relief are explicit."
+  },
+  {
+    "id": "A11",
+    "title": "School renovation finishes late but wins approval",
+    "text": "A school renovation opened two months behind schedule and exceeded its original budget. Nevertheless, teachers welcomed the brighter classrooms and accessible entrances, and families attending an open house said the finished building was worth the inconvenience. District leaders called the result a meaningful improvement while acknowledging the difficult construction process.\n\nConstruction delays stemmed from supply shortages and unexpected repairs to older structural elements. District officials said they authorized additional work after inspections revealed issues that were not included in the initial plan. Some parents questioned why the risks had not been identified earlier, and the school board has asked staff to provide a detailed accounting of the final costs.\n\nAt the reopening, teachers pointed to improved ventilation, accessible corridors and flexible classroom layouts as changes likely to benefit students. Families who toured the building praised the finished spaces while acknowledging frustration over the extended construction period. The district has promised a public review of procurement and scheduling practices before it begins another renovation. Despite the setbacks, the overall response to the completed building was largely appreciative and forward-looking.",
+    "expected_label": "positive",
+    "ambiguity": "ambiguous",
+    "annotation_note": "Positive evaluation outweighs delay and cost concerns; arguable mixed case."
+  },
+  {
+    "id": "A12",
+    "title": "Factory adds jobs as residents question emissions",
+    "text": "A manufacturer announced 150 new positions at its expanded facility, a development welcomed by job seekers and the chamber of commerce. Nearby residents, however, raised concerns about increased truck traffic and potential air pollution. Regulators said environmental monitoring will continue, and neither supporters nor critics claimed the debate was resolved.\n\nCompany representatives said the expansion will add production lines and create positions in maintenance, logistics and quality control. Local workforce groups welcomed the announcement, noting that applicants will be offered training for some roles. The manufacturer has not yet reported how many positions will be filled by existing employees or how quickly the hiring process will proceed.\n\nResidents near the industrial site attended a public information session to ask about truck routes, noise and emissions monitoring. The company said it plans to follow permit requirements and share periodic updates, while environmental advocates requested independent measurements. County officials described the project as a potential economic benefit but said regulatory reviews would continue separately from the hiring announcement. The available information leaves both the employment benefits and the neighborhood effects under active discussion.",
+    "expected_label": "neutral",
+    "ambiguity": "ambiguous",
+    "annotation_note": "Balances economic opportunity with unresolved community concerns."
+  },
+  {
+    "id": "A13",
+    "title": "Storm response improves despite lingering outages",
+    "text": "Emergency teams cleared most blocked roads within a day after a powerful storm, faster than during the previous major outage. Officials praised crews for their coordination, although hundreds of households still lacked electricity on the second night. Residents expressed gratitude for the progress while urging utility workers to prioritize vulnerable neighborhoods.\n\nThe storm brought heavy rain and wind that knocked down trees and interrupted power across the district. Road crews prioritized routes used by ambulances and public transit, working with utility teams to reopen access to damaged areas. Emergency managers said revised dispatch procedures helped them identify blocked roads more quickly than in a comparable storm last year.\n\nResidents without electricity reported spoiled food, disrupted work and uncertainty about restoration estimates. Officials acknowledged those frustrations and said some repairs require specialized equipment that could not be deployed until conditions were safe. Community centers remained open for charging devices and collecting supplies. While recovery was far from complete, local officials and volunteer groups said the coordinated road-clearing effort made a noticeable difference in how quickly neighborhoods could reconnect with essential services.",
+    "expected_label": "positive",
+    "ambiguity": "ambiguous",
+    "annotation_note": "Overall appreciative framing despite serious remaining harm."
+  },
+  {
+    "id": "A14",
+    "title": "Hospital wait times fall but staffing concerns persist",
+    "text": "A hospital reported shorter emergency department wait times this quarter after introducing a new triage system. Administrators described the change as encouraging, but nurses cautioned that staffing shortages still leave some shifts stretched thin. The hospital plans another review before deciding whether to expand the program.\n\nHospital administrators attributed the reduction partly to a revised intake process that directs patients to the appropriate care team earlier in their visit. The hospital released quarterly averages but did not provide a detailed breakdown by time of day or severity of illness. Patient advocates said shorter waits would be meaningful if they are sustained and do not come at the expense of care quality.\n\nNursing representatives said vacancies and overtime remain serious concerns, particularly on weekends. They asked management to publish staffing indicators alongside wait-time figures and to explain whether the new workflow adds responsibilities to already busy teams. Administrators said recruitment is ongoing and promised a follow-up review. The preliminary data suggest operational gains, but staff and patient groups said it is too early to draw a conclusion about broader service conditions.",
+    "expected_label": "neutral",
+    "ambiguity": "ambiguous",
+    "annotation_note": "A tangible improvement is counterbalanced by unresolved staffing risks."
+  },
+  {
+    "id": "A15",
+    "title": "Transit fare increase follows service cuts",
+    "text": "The transit authority approved a fare increase shortly after reducing service on two routes. Officials said the additional revenue is necessary to avoid deeper cuts, but riders called the decision unfair to people with few alternatives. Advocates warned that the combined changes could make daily commutes harder for low-income households.\n\nThe new fares are scheduled to take effect at the start of the next service period. The authority said rising maintenance costs and a budget shortfall made the increase unavoidable, and officials argued that the alternative could be additional route reductions. They also announced an application process for discounted passes, though eligibility details remain under review.\n\nAt a public meeting, riders described longer waits, missed connections and the added burden of paying more for fewer trips. Several speakers said they depend on buses to reach work or medical appointments and have no practical substitute. Transit advocates criticized the authority for approving the increase before releasing a detailed recovery plan for service frequency. Board members said they would monitor ridership, but the vote left many passengers doubtful that near-term conditions will improve.",
+    "expected_label": "negative",
+    "ambiguity": "moderate",
+    "annotation_note": "The explanation is included, but criticism and burdens dominate."
+  },
+  {
+    "id": "A16",
+    "title": "New flood barrier protects district but draws criticism",
+    "text": "A newly completed flood barrier prevented water from reaching several homes during heavy rainfall, an outcome city engineers described as promising. Yet businesses on the opposite bank reported worsened drainage and accused planners of shifting the problem rather than solving it. Officials agreed to investigate the complaints before announcing any further construction.\n\nEngineers said preliminary measurements indicate that the barrier performed as designed during its first major rainfall event. Residents on the protected side described relief after years of repeated flooding, and the public works department said it would continue observing water levels through the rainy season. Officials noted that a single storm is not sufficient to evaluate long-term performance.\n\nAcross the channel, several shop owners said runoff collected near entrances that had not previously flooded as badly. They requested an independent drainage study and asked whether temporary pumps or other changes could reduce future risks. City planners said the barrier was reviewed under existing standards and that complaints would be investigated. The project therefore produced encouraging evidence of protection in one area while prompting unresolved questions about conditions nearby.",
+    "expected_label": "neutral",
+    "ambiguity": "ambiguous",
+    "annotation_note": "Successful protection is offset by plausible redirected harm."
+  },
+  {
+    "id": "A17",
+    "title": "Housing project approved after contentious debate",
+    "text": "A housing proposal won final approval following months of heated public meetings. Supporters celebrated plans for additional affordable units, while opponents said the project would strain local infrastructure. The decision ends the approval process but leaves disagreement over the development’s likely effects largely intact.\n\nThe proposal calls for a mix of affordable and market-rate apartments on a former commercial site. Housing organizations said the project could provide options for residents struggling with rents, while neighborhood associations raised questions about traffic, school capacity and public parking. Planning staff recommended approval with conditions related to street access and stormwater management.\n\nAt the final meeting, supporters and opponents spoke for several hours before the council voted. Developers must still complete standard permitting and construction reviews, and no opening date has been confirmed. Some residents described the approval as overdue progress; others said the council had not fully addressed infrastructure concerns. Officials characterized the vote as a planning decision rather than a guarantee about the project's final costs or community effects.",
+    "expected_label": "neutral",
+    "ambiguity": "ambiguous",
+    "annotation_note": "Approval and celebration are balanced by substantial opposition."
+  },
+  {
+    "id": "A18",
+    "title": "Company refunds customers after billing errors",
+    "text": "A utility company began issuing refunds to customers who had been overcharged for several billing cycles. Customers welcomed the reimbursements, but many said the delayed response damaged their trust. Consumer advocates criticized the company for failing to identify the errors earlier, and an internal review remains ongoing.\n\nThe company said an internal review found that a software configuration error caused certain accounts to receive duplicate fees. Customers will receive credits or reimbursements, depending on their account status. Representatives apologized and said they are changing billing controls to reduce the likelihood of similar mistakes. An independent audit has not yet been made public.\n\nSeveral customers said they spent weeks contacting support before the company acknowledged a wider problem. Consumer advocates argued that refunds are only a first step and asked for clearer notices, faster dispute resolution and an explanation of how the error escaped earlier checks. Although reimbursement is underway, many affected households remain concerned about the burden of proving incorrect charges and whether other billing problems have gone unnoticed.",
+    "expected_label": "negative",
+    "ambiguity": "ambiguous",
+    "annotation_note": "The refund is corrective, but the report emphasizes failures and distrust."
+  },
+  {
+    "id": "A19",
+    "title": "Vaccination drive reaches remote communities",
+    "text": "Mobile healthcare teams visited several remote communities this month, offering vaccinations and routine health screenings where regular appointments are difficult to access. Organizers said attendance exceeded their initial expectations, and residents praised the convenience of receiving care close to home. The program will continue if additional grants are secured.\n\nThe teams operated from temporary sites at community centers and schools, working with local coordinators to publicize visits in advance. Healthcare workers provided information about available services and helped residents schedule follow-up appointments where needed. Organizers said the outreach was intended to reduce travel barriers rather than replace existing clinics.\n\nSome communities had limited appointment slots because of staffing and transport constraints, and organizers acknowledged that follow-up care can still be difficult for residents living far from medical facilities. Nonetheless, local coordinators welcomed the visits, saying people who had postponed routine services could access them closer to home. The program is reviewing participation figures and hopes to adjust future routes based on community feedback. No long-term health outcome data are available yet.",
+    "expected_label": "positive",
+    "ambiguity": "moderate",
+    "annotation_note": "Clearly favorable response, tempered by uncertain future funding."
+  },
+  {
+    "id": "A20",
+    "title": "University announces revised exam calendar",
+    "text": "The university published an updated examination calendar after adjusting the dates of several departmental assessments. Students were advised to confirm their individual schedules with instructors, and the registrar said the new timetable is now available online. No changes to grading rules were announced.\n\nThe revisions affect several courses whose original exam times overlapped with departmental events. The registrar published a replacement schedule and asked instructors to notify students about any room changes. Departments may request corrections through a standard review process, and students with approved accommodations should contact the designated campus office.\n\nUniversity staff said the revised calendar will remain available on the student portal throughout the exam period. Some courses will use different rooms while retaining their original dates, and others have been assigned new times. The registrar noted that individual course announcements remain important because final arrangements can depend on department-specific requirements. No changes to academic grading policies were announced alongside the timetable update.",
+    "expected_label": "neutral",
+    "ambiguity": "clear",
+    "annotation_note": "Administrative timetable update with factual, non-evaluative wording."
+  }
+]
