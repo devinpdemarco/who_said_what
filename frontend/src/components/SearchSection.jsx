@@ -14,38 +14,20 @@ function SearchSection() {
   const [submittedResults, setSubmittedResults] = useState(null)
   const [error, setError] = useState('')
 
-  // Temporary mock data until the backend is connected
-  const exampleArticles = [
-    {
-      source: 'Reuters',
-      headline: 'Example headline from Reuters',
-      summary: 'Example summary of how this source is covering the story.',
-      sentiment: 'Neutral',
-      perspective: 'Factual / Neutral',
-      politicalLeaning: null,
-      publishedDate: 'September 8, 2026',
-      url: 'https://www.reuters.com'
-    },
-    {
-      source: 'Associated Press',
-      headline: 'Example headline from Associated Press',
-      summary: 'Example summary of how a different source is covering the story.',
-      sentiment: 'Positive',
-      perspective: 'Context Focused',
-      politicalLeaning: null,
-      publishedDate: 'September 9, 2026',
-      url: 'https://apnews.com'
-    }
-  ]
-
-  const [articles] = useState(exampleArticles)
+  // State for articles, clusters, loading, and message
+  const [articles, setArticles] = useState([])
+  const [clusters, setClusters] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState('')
 
   const filteredArticles =
     sourceFilter === 'All'
       ? articles
       : articles.filter((article) => article.source === sourceFilter)
 
-  function handleSearch() {
+  
+  async function handleSearch() {
+    // Validate search inputs
     if (!searchTerm.trim() || !startDate || !endDate) {
       setError('Please fill in all fields.')
       setSubmittedResults(null)
@@ -59,28 +41,61 @@ function SearchSection() {
     }
 
     setError('')
+    setMessage('')
+    setLoading(true)
+    setSubmittedResults(null)
+    setArticles([])
+    setClusters([])
 
-    // Temporary mock search until backend integration
-    setSubmittedResults({
-      searchTerm: searchTerm.trim(),
-      startDate,
-      endDate
-    })
+    try {
+      const response = await fetch(import.meta.env.VITE_SEARCH_API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          topic: searchTerm.trim(),
+          start_date: startDate,
+          end_date: endDate,
+          source: 'All'
+        })
+      })
 
+      const data = await response.json()
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || 'Search failed. Please try again.')
+      }
+
+      setArticles(data.articles ?? [])
+      setClusters(data.clusters ?? [])
+      setSourceFilter('All')
+      setMessage(data.message || '')
+
+      setSubmittedResults({
+        searchTerm: searchTerm.trim(),
+        startDate,
+        endDate
+      })
+    } catch (error) {
+      setError(error.message || 'Something went wrong. Please try again.')
+      setSubmittedResults(null)
+    } finally {
+      setLoading(false)
+    }
   }
+
 
   return (
     <section className="search-section">
       <div className="search-content">
 
-        {/* =========================
-            HERO SEARCH DASHBOARD
-           ========================= */}
+        {/* HERO SEARCH DASHBOARD */}
 
         <div className="hero-layout">
 
           <div className="search-panel">
-<p className="eyebrow">News Comparison /</p>
+<p className="eyebrow">News Comparison</p>
 
             <h1>
               Compare perspectives.
@@ -107,8 +122,8 @@ function SearchSection() {
                 }}
               />
 
-              <button onClick={handleSearch}>
-                Search Topic
+              <button onClick={handleSearch} disabled={loading}>
+                {loading ? 'Searching...' : 'Search Topic'}
               </button>
             </div>
 
@@ -140,11 +155,15 @@ function SearchSection() {
                   value={sourceFilter}
                   onChange={(e) => setSourceFilter(e.target.value)}
                 >
-                  <option value="All">All Sources</option>
-                  <option value="Reuters">Reuters</option>
-                  <option value="Associated Press">
-                    Associated Press
-                  </option>
+                  <option value="ALL">All Sources</option>
+                  {[... new Set(articles.map((article) => article.source))]
+                    .filter(Boolean)
+                    .sort()
+                    .map((source) => (
+                      <option key={source} value={source}>
+                        {source}
+                      </option>
+                    ))}
                 </select>
               </div>
             </div>
@@ -173,7 +192,7 @@ function SearchSection() {
                 SENTIMENT LABELS
               </span>
               <h2>{submittedResults ? new Set(filteredArticles.map(article => article.sentiment)).size : 0}</h2>
-              <p>Distinct sentiment labels in demo data</p>
+              <p>Sentiment labels</p>
             </div>
 
             <div className="metric-card">
@@ -181,14 +200,18 @@ function SearchSection() {
                 TIMELINE POINTS
               </span>
               <h2>{submittedResults ? filteredArticles.length : 0}</h2>
-              <p>Published entries in the demo timeline</p>
+              <p>Published entries in timeline</p>
             </div>
           </div>
         </div>
 
-        {/* =========================
-            SEARCH FEEDBACK
-           ========================= */}
+        {/* SEARCH FEEDBACK */}
+
+        {loading && ( 
+          <p className="loading-message" role="status">
+            Searching for articles...
+          </p>
+        )}
 
         {error && (
           <p className="error-message">{error}</p>
@@ -197,21 +220,17 @@ function SearchSection() {
         {submittedResults &&
           filteredArticles.length === 0 && (
             <p className="no-result">
-              No articles found for the given search criteria.
+              No articles have been found for the given search criteria.
             </p>
           )}
 
-        {/* =========================
-            ARTICLE CAROUSEL
-           ========================= */}
+        {/* ARTICLE CAROUSEL */}
 
         {submittedResults && filteredArticles.length > 0 && (
           <ArticleCarousel articles={filteredArticles} />
         )}
 
-        {/* =========================
-            RESULTS DASHBOARD
-           ========================= */}
+        {/* RESULTS DASHBOARD */}
 
         {submittedResults && filteredArticles.length > 0 && (
           <div className="results-area">
@@ -220,9 +239,9 @@ function SearchSection() {
 
             <div className="results-heading">
               <div>
-                <p className="section-kicker">YOUR ANALYSIS WORKSPACE</p>
+                <p className="section-kicker">ANALYSIS</p>
                 <h2>Coverage, side by side.</h2>
-                <p>Explore the example articles and compare how each source approaches the story.</p>
+                <p>Explore the articles and compare how each source approaches the story.</p>
               </div>
               <span className="results-count">{filteredArticles.length} articles</span>
             </div>
@@ -239,7 +258,7 @@ function SearchSection() {
               <div className="article-cards">
                 {filteredArticles.map((article) => (
                   <ArticleCard
-                    key={article.headline}
+                    key={article.id}
                     source={article.source}
                     headline={article.headline}
                     summary={article.summary}
@@ -267,13 +286,13 @@ function SearchSection() {
               <BiasCoverage articles={filteredArticles} />
             </div>
 
-            {/* NARRATIVE TIMELINE */}
+            {/* NARRATIVE Over Time */}
 
             <div className="timeline-wrap">
               <div className="section-heading">
                 <div>
                   <p className="section-kicker">03 / STORY PROGRESSION</p>
-                  <h2>Follow the timeline</h2>
+                  <h2>Follow the narrative timeline</h2>
                 </div>
               </div>
               <Timeline articles={filteredArticles} />
