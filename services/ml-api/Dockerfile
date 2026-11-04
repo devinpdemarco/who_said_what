@@ -14,6 +14,9 @@ RUN pip install --no-cache-dir -r api-requirements.txt \
     && pip install --no-cache-dir -r ml-requirements.txt \
     && python -m nltk.downloader -d /usr/local/share/nltk_data punkt punkt_tab
 
+RUN mkdir -p /home/appuser/.cache/huggingface \
+    && chown -R appuser:appuser /home/appuser/.cache
+
 COPY services/ml-api/app ./app
 COPY ML ./ML
 
