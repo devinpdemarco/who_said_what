@@ -42,6 +42,14 @@ The ML adapter can be checked through Caddy:
 curl -f https://whosaidwhat-n8n.duckdns.org/api/ml/health
 ```
 
+The data pipeline runs as the internal-only `data-api` service. From an n8n
+HTTP Request node, call `POST http://data-api:8001/process` with a JSON object
+containing a non-empty `articles` list. Each raw article may include `title`,
+`url`, `source`, `author`, `published_date`, and `raw_content`. The service
+cleans, validates, and deduplicates the articles, inserts valid rows into
+Supabase, and returns `valid_articles` plus `invalid_count`. Configure
+`SUPABASE_URL` and `SUPABASE_KEY` only in the server `.env` file.
+
 Until Kynnedy's pipeline is connected, `/api/ml/analyze` intentionally returns
 HTTP 503. It does not return mock sentiment or bias values that could be
 mistaken for real analysis.

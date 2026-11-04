@@ -79,6 +79,26 @@ services:
       retries: 5
       start_period: 15s
 
+  data-api:
+    build:
+      context: .
+      dockerfile: services/data-api/Dockerfile
+    restart: unless-stopped
+    expose:
+      - "8001"
+    environment:
+      SUPABASE_URL: ${SUPABASE_URL:?Set SUPABASE_URL in .env}
+      SUPABASE_KEY: ${SUPABASE_KEY:?Set SUPABASE_KEY in .env}
+    mem_limit: ${DATA_MEM_LIMIT:-256m}
+    cpus: ${DATA_CPUS:-0.5}
+    logging: *logging
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8001/health', timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
   frontend:
     build:
       context: ./frontend
