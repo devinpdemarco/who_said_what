@@ -45,3 +45,23 @@
 - [x] Document local verification, the temporary API behavior, and the information required from Kynnedy.
 - [ ] Build the image and run the automated API tests.
 - [ ] Commit the completed integration foundation.
+
+### Task 4: Connect and deploy the real pipeline
+
+**Files:**
+- Modify: `services/ml-api/app/main.py`
+- Create: `services/ml-api/app/pipeline.py`
+- Modify: `services/ml-api/tests/test_api.py`
+- Modify: `services/ml-api/Dockerfile`
+- Create: `services/ml-api/ml-requirements.txt`
+- Modify: `compose.yaml`
+- Modify: `ML/src/analyze_sentiment.py`
+- Create: `ML/tests/test_analyze_sentiment.py`
+
+- [x] Write failing API tests for a connected health response and returned ML results.
+- [x] Connect `/analyze` to the callable ML entry point and pass the API tests.
+- [x] Write a failing test showing that the sentiment model loads more than once.
+- [x] Cache the classifier and pass all ML and API unit tests.
+- [x] Package CPU-only ML dependencies and persistent model cache in Compose.
+- [ ] Build and restart only `ml-api` on EC2.
+- [ ] Verify public health and one real analysis request.

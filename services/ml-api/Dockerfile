@@ -7,10 +7,15 @@ WORKDIR /app
 
 RUN useradd --create-home --uid 10001 appuser
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY services/ml-api/requirements.txt ./api-requirements.txt
+COPY services/ml-api/ml-requirements.txt ./ml-requirements.txt
+RUN pip install --no-cache-dir -r api-requirements.txt \
+    && pip install --no-cache-dir torch==2.9.0 --index-url https://download.pytorch.org/whl/cpu \
+    && pip install --no-cache-dir -r ml-requirements.txt \
+    && python -m nltk.downloader -d /usr/local/share/nltk_data punkt punkt_tab
 
-COPY app ./app
+COPY services/ml-api/app ./app
+COPY ML ./ML
 
 USER appuser
 
