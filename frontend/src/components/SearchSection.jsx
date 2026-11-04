@@ -14,9 +14,8 @@ function SearchSection() {
   const [submittedResults, setSubmittedResults] = useState(null)
   const [error, setError] = useState('')
 
-  // State for articles, clusters, loading, and message
+  // State for articles, loading, and message
   const [articles, setArticles] = useState([])
-  const [clusters, setClusters] = useState([])
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
 
@@ -25,7 +24,7 @@ function SearchSection() {
       ? articles
       : articles.filter((article) => article.source === sourceFilter)
 
-  
+
   async function handleSearch() {
     // Validate search inputs
     if (!searchTerm.trim() || !startDate || !endDate) {
@@ -45,7 +44,6 @@ function SearchSection() {
     setLoading(true)
     setSubmittedResults(null)
     setArticles([])
-    setClusters([])
 
     try {
       const response = await fetch(import.meta.env.VITE_SEARCH_API_URL, {
@@ -68,7 +66,6 @@ function SearchSection() {
       }
 
       setArticles(data.articles ?? [])
-      setClusters(data.clusters ?? [])
       setSourceFilter('All')
       setMessage(data.message || '')
 
@@ -207,7 +204,7 @@ function SearchSection() {
 
         {/* SEARCH FEEDBACK */}
 
-        {loading && ( 
+        {loading && (
           <p className="loading-message" role="status">
             Searching for articles...
           </p>
