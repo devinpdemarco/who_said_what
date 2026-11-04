@@ -92,3 +92,5 @@ Required school resource tag: `Group=Who_Said_What`. Only manage this team's res
 On September 23, 2026, Compose configuration and Caddy validation passed. Both running services were healthy; public HTTPS returned 200 and `/healthz` returned `{"status":"ok"}`.
 
 On November 3, 2026, the frontend lint and production build passed locally. The frontend and ML adapter images then built successfully on EC2, all four Compose services reported healthy, Caddy obtained HTTPS for `whosaidwhat.duckdns.org`, the frontend health endpoint returned `ok`, the n8n health endpoint returned `{"status":"ok"}`, and the ML health endpoint reported that the adapter was running with the real pipeline not yet connected.
+
+Later on November 3, 2026, Kynnedy's callable pipeline was connected to `/api/ml/analyze` and deployed as a CPU-only container. A real request returned sentiment results for 20 articles and 7 clusters; after the final container rebuild, an 8-article request returned 8 sentiment results and 7 clusters in 31.3 seconds. All four services remained healthy. Hugging Face model files are retained in the `ml_model_cache` volume.
