@@ -6,7 +6,7 @@ The machine learning pipeline will consist of clustering, keyword extraction, an
 ## Steps
 1. Text Preprocessing
 2. Document Embedding
-3. DBSCAN Clustering
+3. K-Means Clustering
 4. Keyword Extraction with YAKE
 5. Sentiment Analysis
 6. Bias Analysis
