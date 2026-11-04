@@ -22,7 +22,7 @@ AWS IAM access does not itself grant SSH or n8n login access.
 
 ## Configuration
 
-The server checkout is `/home/ubuntu/who_said_what`. The shared integration branch is `dev`.
+The active server checkout is `/home/ubuntu/who_said_what_deploy`. The shared integration branch is `dev`. The older `/home/ubuntu/who_said_what` checkout is retained because it contains the previous deployment state; do not use it for routine updates.
 
 For a fresh deployment only, create `.env` from `.env.example`, generate a key with `openssl rand -hex 32`, and set `N8N_ENCRYPTION_KEY`. Set `APP_DOMAIN=whosaidwhat.duckdns.org`, or replace it with the frontend hostname you created. Restrict `.env` to mode 600. On an existing deployment, retain its original encryption key: saved credentials depend on it. Never commit this file.
 
@@ -91,4 +91,4 @@ Required school resource tag: `Group=Who_Said_What`. Only manage this team's res
 
 On September 23, 2026, Compose configuration and Caddy validation passed. Both running services were healthy; public HTTPS returned 200 and `/healthz` returned `{"status":"ok"}`.
 
-On November 3, 2026, the frontend lint and production build passed locally. Docker image and Caddy validation must be run on the Docker-enabled EC2 host before the frontend deployment is considered verified.
+On November 3, 2026, the frontend lint and production build passed locally. The frontend and ML adapter images then built successfully on EC2, all four Compose services reported healthy, Caddy obtained HTTPS for `whosaidwhat.duckdns.org`, the frontend health endpoint returned `ok`, the n8n health endpoint returned `{"status":"ok"}`, and the ML health endpoint reported that the adapter was running with the real pipeline not yet connected.
