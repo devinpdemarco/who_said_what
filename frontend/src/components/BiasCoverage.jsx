@@ -21,7 +21,7 @@ function BiasCoverage({ articles }) {
                 {articles.map((article) => (
                     <div
                     className="bias-card"
-                    key={article.headline}
+                    key={article.id}
                     >
                         <div className="bias-card-header">
                             <span className="bias-source">

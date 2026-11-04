@@ -155,7 +155,7 @@ function SearchSection() {
                   value={sourceFilter}
                   onChange={(e) => setSourceFilter(e.target.value)}
                 >
-                  <option value="ALL">All Sources</option>
+                  <option value="All">All Sources</option>
                   {[... new Set(articles.map((article) => article.source))]
                     .filter(Boolean)
                     .sort()
@@ -217,10 +217,9 @@ function SearchSection() {
           <p className="error-message">{error}</p>
         )}
 
-        {submittedResults &&
-          filteredArticles.length === 0 && (
+        {submittedResults && filteredArticles.length === 0 && (
             <p className="no-result">
-              No articles have been found for the given search criteria.
+              {message || "No articles have been found for the given search criteria."}
             </p>
           )}
 
