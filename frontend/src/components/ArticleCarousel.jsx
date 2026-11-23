@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import PoliticalLeaningIndicator from './PoliticalLeaningIndicator'
 
-function ArticleCarousel({ articles }) {
+function ArticleCarousel({ articles, clusters = [] }) {
   const [currentIndex, setCurrentIndex] = useState(0)
 
   if (articles.length === 0) {
@@ -10,6 +10,11 @@ function ArticleCarousel({ articles }) {
 
   const safeIndex = Math.min(currentIndex, articles.length - 1)
   const article = articles[safeIndex]
+  const cluster = clusters.find(
+    (cluster) => cluster.cluster_id === article.clusterId
+  )
+
+  const keywords = cluster?.keywords ?? []
 
   return (
     <section className="article-carousel">
@@ -28,6 +33,20 @@ function ArticleCarousel({ articles }) {
         <h3>{article.headline}</h3>
 
         <p>{article.excerpt || article.summary}</p>
+
+        {keywords.length > 0 && (
+          <div className="article-keywords">
+            <h4>Related Cluster Keywords</h4>
+
+            <div className="keyword-tags">
+              {keywords.slice(0, 5).map((keyword) => (
+                <span className="keyword-tag" key={keyword.text}>
+                  {keyword.text}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
 
         <PoliticalLeaningIndicator
           leaning={article.politicalLeaning}

@@ -226,7 +226,10 @@ function SearchSection() {
         {/* ARTICLE CAROUSEL */}
 
         {submittedResults && filteredArticles.length > 0 && (
-          <ArticleCarousel articles={filteredArticles} />
+          <ArticleCarousel
+            articles={filteredArticles}
+            clusters={clusters}
+          />
         )}
 
         {/* RESULTS DASHBOARD */}
@@ -255,19 +258,28 @@ function SearchSection() {
               </div>
 
               <div className="article-cards">
-                {filteredArticles.map((article) => (
-                  <ArticleCard
-                    key={article.id}
-                    source={article.source}
-                    headline={article.headline}
-                    summary={article.summary}
-                    sentiment={article.sentiment}
-                    perspective={article.perspective}
-                    publishedDate={article.publishedDate}
-                    url={article.url}
-                    politicalLeaning={article.politicalLeaning}
-                  />
-                ))}
+                {filteredArticles.map((article) => {
+                  const cluster = clusters.find(
+                    (cluster) => cluster.cluster_id === article.clusterId
+                  )
+
+                  const keywords = cluster?.keywords ?? []
+
+                  return (
+                    <ArticleCard
+                      key={article.id}
+                      source={article.source}
+                      headline={article.headline}
+                      summary={article.summary}
+                      sentiment={article.sentiment}
+                      perspective={article.perspective}
+                      publishedDate={article.publishedDate}
+                      url={article.url}
+                      politicalLeaning={article.politicalLeaning}
+                      keywords={keywords}
+                    />
+                  )
+                })}
               </div>
             </div>
 

@@ -642,7 +642,7 @@ select {
     grid-template-columns: 1fr;
   }
 }
-/* POLITICAL LEANING INDICATOR */
+/* Political Indicator */
 .political-indicator {
   margin-top: 24px;
   padding-top: 18px;
@@ -711,9 +711,7 @@ select {
     overflow-wrap: anywhere;
   }
 }
-/* =========================
-   DASHBOARD LAYOUT
-   ========================= */
+/* dash board layout */
 .comparison-articles-section {
   margin-top: 28px;
 }
@@ -743,15 +741,13 @@ select {
     grid-template-columns: 1fr;
   }
 }
-/* =========================
-   REFINED RESULTS THEME
-   ========================= */
+
 .metric-card h2 {
   margin: 0 0 8px;
   font-size: 34px;
   color: #182235;
 }
-/* The carousel stays in the light search area. */
+/* The carousel location */
 .article-carousel {
   background: #ffffff;
   border: 1px solid #dce3ec;
@@ -762,7 +758,7 @@ select {
   background: #f3f7fc;
   border: 1px solid #e0e9f5;
 }
-/* A single dark background groups all result components. */
+/* groups all result components. */
 .results-area {
   margin-top: 32px;
   padding: 32px;
@@ -788,7 +784,7 @@ select {
   background: #f5f7fb;
   border: 1px solid #e1e7f0;
 }
-/* The analysis columns are narrower than full-page cards. */
+/* The analysis columns shrink to fit their content */
 .analysis-grid .comparison-insights,
 .analysis-grid .bias-grid {
   grid-template-columns: 1fr;
@@ -805,10 +801,6 @@ select {
   .bias-grid { grid-template-columns: 1fr; }
 }
 
-/* ============================================================
-   EDITORIAL DASHBOARD REDESIGN
-   A single design system: ink, slate, white and restrained blue.
-   ============================================================ */
 :root {
   --ink: #132238;
   --navy: #15263d;
@@ -954,4 +946,33 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .search-bar button { margin-top: 8px; }
   .carousel-navigation button { padding: 11px 14px; }
   .article-analysis { grid-template-columns: 1fr; }
+}
+
+/* Article clustering keywords */
+
+.article-keywords {
+  margin: 16px 0;
+}
+
+.article-keywords h4 {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #64748b;
+}
+
+.keyword-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.keyword-tag {
+  display: inline-block;
+  padding: 6px 12px;
+  background: #eef2ff;
+  color: #3730a3;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
 }

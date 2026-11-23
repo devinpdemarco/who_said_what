@@ -7,7 +7,8 @@ function ArticleCard({
   perspective,
   publishedDate,
   url,
-  politicalLeaning
+  politicalLeaning,
+  keywords = []
 }) {
   return (
     <article className="article-card">
@@ -26,6 +27,20 @@ function ArticleCard({
       <p className="article-summary">
         {summary}
       </p>
+
+            {keywords.length > 0 && (
+        <div className="article-keywords">
+          <h4>Related Cluster Keywords</h4>
+
+          <div className="keyword-tags">
+            {keywords.slice(0, 5).map((keyword) => (
+              <span className="keyword-tag" key={keyword.text}>
+                {keyword.text}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="article-analysis">
         <div className="analysis-box">
