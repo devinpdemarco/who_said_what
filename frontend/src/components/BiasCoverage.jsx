@@ -41,12 +41,7 @@ function BiasCoverage({ articles }) {
                             <strong>{article.perspective}</strong>
                         </div>
 
-                        <div className="bias-detail">
-                            <span>Coverage focus</span>
-                            <strong>
-                                Example
-                            </strong>
-                        </div>
+                        
                     </div>
                 ))}
             </div>
